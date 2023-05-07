@@ -131,28 +131,30 @@ const CONNECTIONS_DICT = {
 
 const BOARD = [];
 
-const USED_STATES = [
-    IMAGE_BLANK,
-    IMAGE_ALL,
+const EXISTING_STATES = [
+    {state: IMAGE_BLANK, used: true},
+    {state: IMAGE_ALL, used: true},
 
-    IMAGE_FORK_UP,
-    IMAGE_FORK_DOWN,
-    IMAGE_FORK_LEFT,
-    IMAGE_FORK_RIGHT,
+    {state: IMAGE_FORK_UP, used: true},
+    {state: IMAGE_FORK_DOWN, used: true},
+    {state: IMAGE_FORK_LEFT, used: true},
+    {state: IMAGE_FORK_RIGHT, used: true},
 
-    IMAGE_CORNER_TOP_LEFT,
-    IMAGE_CORNER_TOP_RIGHT,
-    IMAGE_CORNER_BOTTOM_LEFT,
-    IMAGE_CORNER_BOTTOM_RIGHT,
+    {state: IMAGE_CORNER_TOP_LEFT, used: true},
+    {state: IMAGE_CORNER_TOP_RIGHT, used: true},
+    {state: IMAGE_CORNER_BOTTOM_LEFT, used: true},
+    {state: IMAGE_CORNER_BOTTOM_RIGHT, used: true},
 
-    IMAGE_END_UP,
-    IMAGE_END_DOWN,
-    IMAGE_END_LEFT,
-    IMAGE_END_RIGHT,
+    {state: IMAGE_END_UP, used: true},
+    {state: IMAGE_END_DOWN, used: true},
+    {state: IMAGE_END_LEFT, used: true},
+    {state: IMAGE_END_RIGHT, used: true},
 
-    IMAGE_STRAIGHT_VERTICAL,
-    IMAGE_STRAIGHT_HORIZONTAL,
+    {state: IMAGE_STRAIGHT_VERTICAL, used: true},
+    {state: IMAGE_STRAIGHT_HORIZONTAL, used: true},
 ];
+
+var USED_STATES = [];
 
 
 var SIZE = 20;
@@ -168,9 +170,13 @@ function mod(num, mod)
 
 $(async function()
 {
+    // events
     $(window).on("resize", resizeBoard);
+    // general setup
     resizeBoard();
-
+    buildStateController();
+    // board setup
+    rebuildUsedStates();
     populateBoard();
 });
 
@@ -178,6 +184,34 @@ function resizeBoard(evt)
 {
     console.log($("#board").width());
     $("#board").height($("#board").width());
+}
+
+function buildStateController()
+{
+    let statesDiv = $("#states");
+    statesDiv.empty();
+    EXISTING_STATES.forEach(function (eState, x) {
+        statesDiv.append(`<input type="checkbox" id="state_${x}" ${eState.used ? "checked" : ""}><img src="${eState.state}" class="stateIcon" alt="state">`);
+    });
+}
+
+function updateUsedStates()
+{
+    EXISTING_STATES.forEach(function (eState, x) {
+        eState.used = $(`#state_${x}`).is(':checked');
+    });
+    rebuildUsedStates();
+}
+
+function rebuildUsedStates()
+{
+    USED_STATES.length = 0;
+    EXISTING_STATES.forEach(eState => {
+        if (eState.used)
+        {
+            USED_STATES.push(eState.state);
+        }
+    });
 }
 
 function regenerateBoard()

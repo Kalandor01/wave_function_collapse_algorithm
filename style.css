@@ -10,3 +10,14 @@ main {
     width: 95%;
     flex-wrap: wrap;
 }
+
+#states {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.stateIcon {
+    width: 40%;
+}
