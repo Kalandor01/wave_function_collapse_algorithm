@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="script.js"></script>
+    <title>Function collapse</title>
+</head>
+<body>
+    <main>
+        <div id="board"></div>
+        <aside>
+            <label for="size">Borad size</label>
+            <input type="text" name="size" value="20" id="boardSize"><br>
+            <label for="delay">Generation delay (-1 = no delay)</label>
+            <input type="text" name="delay" value="0" id="genDelay"><br>
+            <button onclick="regenerateBoard()">Regenerate</button>
+        </aside>
+    </main>
+</body>
+</html>

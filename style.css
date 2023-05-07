@@ -1,0 +1,12 @@
+main {
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+#board {
+    margin: auto;
+    background-color: black;
+    display: flex;
+    width: 95%;
+    flex-wrap: wrap;
+}
