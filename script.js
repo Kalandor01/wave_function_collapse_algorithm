@@ -1,27 +1,27 @@
 
-const IMAGE_NOTHING = "../img/nothing.png";
-const IMAGE_ERROR = "../img/error.png";
+const IMAGE_NOTHING = "/img/nothing.png";
+const IMAGE_ERROR = "/img/error.png";
 
-const IMAGE_BLANK = "../img/blank.png";
-const IMAGE_ALL = "../img/all.png";
+const IMAGE_BLANK = "/img/blank.png";
+const IMAGE_ALL = "/img/all.png";
 
-const IMAGE_FORK_UP = "../img/fork_up.png";
-const IMAGE_FORK_DOWN = "../img/fork_down.png";
-const IMAGE_FORK_LEFT = "../img/fork_left.png";
-const IMAGE_FORK_RIGHT = "../img/fork_right.png";
+const IMAGE_FORK_UP = "/img/fork_up.png";
+const IMAGE_FORK_DOWN = "/img/fork_down.png";
+const IMAGE_FORK_LEFT = "/img/fork_left.png";
+const IMAGE_FORK_RIGHT = "/img/fork_right.png";
 
-const IMAGE_CORNER_TOP_LEFT = "../img/corner_top_left.png";
-const IMAGE_CORNER_TOP_RIGHT = "../img/corner_top_right.png";
-const IMAGE_CORNER_BOTTOM_LEFT = "../img/corner_bottom_left.png";
-const IMAGE_CORNER_BOTTOM_RIGHT = "../img/corner_bottom_right.png";
+const IMAGE_CORNER_TOP_LEFT = "/img/corner_top_left.png";
+const IMAGE_CORNER_TOP_RIGHT = "/img/corner_top_right.png";
+const IMAGE_CORNER_BOTTOM_LEFT = "/img/corner_bottom_left.png";
+const IMAGE_CORNER_BOTTOM_RIGHT = "/img/corner_bottom_right.png";
 
-const IMAGE_END_UP = "../img/end_up.png";
-const IMAGE_END_DOWN = "../img/end_down.png";
-const IMAGE_END_LEFT = "../img/end_left.png";
-const IMAGE_END_RIGHT = "../img/end_right.png";
+const IMAGE_END_UP = "/img/end_up.png";
+const IMAGE_END_DOWN = "/img/end_down.png";
+const IMAGE_END_LEFT = "/img/end_left.png";
+const IMAGE_END_RIGHT = "/img/end_right.png";
 
-const IMAGE_STRAIGHT_VERTICAL = "../img/straight_vertical.png";
-const IMAGE_STRAIGHT_HORIZONTAL = "../img/straight_horizontal.png";
+const IMAGE_STRAIGHT_VERTICAL = "/img/straight_vertical.png";
+const IMAGE_STRAIGHT_HORIZONTAL = "/img/straight_horizontal.png";
 
 
 const CONNECTIONS_DICT = {
