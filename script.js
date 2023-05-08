@@ -1,160 +1,179 @@
-
+// not colapsed image
 const IMAGE_NOTHING = "img/nothing.png";
-const IMAGE_ERROR = "img/error.png";
 
-const IMAGE_BLANK = "img/blank.png";
-const IMAGE_ALL = "img/all.png";
+// no state left error
+const STATE_ERROR = "ERROR";
 
-const IMAGE_FORK_UP = "img/fork_up.png";
-const IMAGE_FORK_DOWN = "img/fork_down.png";
-const IMAGE_FORK_LEFT = "img/fork_left.png";
-const IMAGE_FORK_RIGHT = "img/fork_right.png";
+// basic states
+const STATE_BLANK = "blank";
+const STATE_ALL = "all";
+const STATE_FORK = "fork";
+const STATE_CORNER = "corner";
+const STATE_END = "end";
+const STATE_STRAIGHT = "straight";
 
-const IMAGE_CORNER_TOP_LEFT = "img/corner_top_left.png";
-const IMAGE_CORNER_TOP_RIGHT = "img/corner_top_right.png";
-const IMAGE_CORNER_BOTTOM_LEFT = "img/corner_bottom_left.png";
-const IMAGE_CORNER_BOTTOM_RIGHT = "img/corner_bottom_right.png";
+// transition states
+const STATE_BLANK_T = "blank_t";
+const STATE_END_T = "end_t";
+const STATE_STRAIGHT_T = "straight_t";
 
-const IMAGE_END_UP = "img/end_up.png";
-const IMAGE_END_DOWN = "img/end_down.png";
-const IMAGE_END_LEFT = "img/end_left.png";
-const IMAGE_END_RIGHT = "img/end_right.png";
+// extra states
+const STATE_BLANK_2 = "blank_2";
+const STATE_ALL_2 = "all_2";
+const STATE_FORK_2 = "fork_2";
+const STATE_CORNER_2 = "corner_2";
+const STATE_END_2 = "end_2";
+const STATE_STRAIGHT_2 = "straight_2";
 
-const IMAGE_STRAIGHT_VERTICAL = "img/straight_vertical.png";
-const IMAGE_STRAIGHT_HORIZONTAL = "img/straight_horizontal.png";
+// map states to images
+const STATE_IMAGES_DICT = {
+    [STATE_ERROR]: "img/error.png",
 
+    [STATE_BLANK]: "img/blank.png",
+    [STATE_ALL]: "img/all.png",
+    [STATE_FORK]: "img/fork.png",
+    [STATE_CORNER]: "img/corner.png",
+    [STATE_END]: "img/end.png",
+    [STATE_STRAIGHT]: "img/straight.png",
 
-const CONNECTIONS_DICT = {
-    [IMAGE_ERROR]: {
-        up: null,
-        down: null,
-        left: null,
-        right: null
+    [STATE_BLANK_T]: "img/blank_t.png",
+    [STATE_END_T]: "img/end_t.png",
+    [STATE_STRAIGHT_T]: "img/straight_t.png",
+
+    [STATE_BLANK_2]: "img/blank_2.png",
+    [STATE_ALL_2]: "img/all_2.png",
+    [STATE_FORK_2]: "img/fork_2.png",
+    [STATE_CORNER_2]: "img/corner_2.png",
+    [STATE_END_2]: "img/end_2.png",
+    [STATE_STRAIGHT_2]: "img/straight_2.png",
+}
+
+// map states to connections
+const BASE_CONNECTIONS_DICT = {
+    [STATE_BLANK]: {
+        up: "1_0",
+        down: "1_0",
+        left: "1_0",
+        right: "1_0",
     },
-    [IMAGE_BLANK]: {
-        up: false,
-        down: false,
-        left: false,
-        right: false
+    [STATE_ALL]: {
+        up: "1_1",
+        down: "1_1",
+        left: "1_1",
+        right: "1_1",
     },
-    [IMAGE_ALL]: {
-        up: true,
-        down: true,
-        left: true,
-        right: true
+    [STATE_FORK]: {
+        up: "1_1",
+        down: "1_0",
+        left: "1_1",
+        right: "1_1",
     },
-    [IMAGE_FORK_UP]: {
-        up: true,
-        down: false,
-        left: true,
-        right: true
+    [STATE_CORNER]: {
+        up: "1_1",
+        down: "1_0",
+        left: "1_1",
+        right: "1_0",
     },
-    [IMAGE_FORK_DOWN]: {
-        up: false,
-        down: true,
-        left: true,
-        right: true
+    [STATE_END]: {
+        up: "1_1",
+        down: "1_0",
+        left: "1_0",
+        right: "1_0",
     },
-    [IMAGE_FORK_LEFT]: {
-        up: true,
-        down: true,
-        left: true,
-        right: false
+    [STATE_STRAIGHT]: {
+        up: "1_1",
+        down: "1_1",
+        left: "1_0",
+        right: "1_0",
     },
-    [IMAGE_FORK_RIGHT]: {
-        up: true,
-        down: true,
-        left: false,
-        right: true
+
+    [STATE_BLANK_T]: {
+        up: "1_0",
+        down: "2_0",
+        left: "0.5_0",
+        right: "0.5_0",
     },
-    [IMAGE_CORNER_TOP_LEFT]: {
-        up: true,
-        down: false,
-        left: true,
-        right: false
+    [STATE_END_T]: {
+        up: "1_1",
+        down: "2_0",
+        left: "0.5_0",
+        right: "0.5_0",
     },
-    [IMAGE_CORNER_TOP_RIGHT]: {
-        up: true,
-        down: false,
-        left: false,
-        right: true
+    [STATE_STRAIGHT_T]: {
+        up: "1_1",
+        down: "2_1",
+        left: "0.5_0",
+        right: "0.5_0",
     },
-    [IMAGE_CORNER_BOTTOM_LEFT]: {
-        up: false,
-        down: true,
-        left: true,
-        right: false
+
+    [STATE_BLANK_2]: {
+        up: "2_0",
+        down: "2_0",
+        left: "2_0",
+        right: "2_0",
     },
-    [IMAGE_CORNER_BOTTOM_RIGHT]: {
-        up: false,
-        down: true,
-        left: false,
-        right: true
+    [STATE_ALL_2]: {
+        up: "2_1",
+        down: "2_1",
+        left: "2_1",
+        right: "2_1",
     },
-    [IMAGE_END_UP]: {
-        up: true,
-        down: false,
-        left: false,
-        right: false
+    [STATE_FORK_2]: {
+        up: "2_1",
+        down: "2_0",
+        left: "2_1",
+        right: "2_1",
     },
-    [IMAGE_END_DOWN]: {
-        up: false,
-        down: true,
-        left: false,
-        right: false
+    [STATE_CORNER_2]: {
+        up: "2_1",
+        down: "2_0",
+        left: "2_1",
+        right: "2_0",
     },
-    [IMAGE_END_LEFT]: {
-        up: false,
-        down: false,
-        left: true,
-        right: false
+    [STATE_END_2]: {
+        up: "2_1",
+        down: "2_0",
+        left: "2_0",
+        right: "2_0",
     },
-    [IMAGE_END_RIGHT]: {
-        up: false,
-        down: false,
-        left: false,
-        right: true
-    },
-    [IMAGE_STRAIGHT_VERTICAL]: {
-        up: true,
-        down: true,
-        left: false,
-        right: false
-    },
-    [IMAGE_STRAIGHT_HORIZONTAL]: {
-        up: false,
-        down: false,
-        left: true,
-        right: true
+    [STATE_STRAIGHT_2]: {
+        up: "2_1",
+        down: "2_1",
+        left: "2_0",
+        right: "2_0",
     },
 }
 
-const BOARD = [];
+// list of usable states, for rotation
+const BASE_STATES = [
+    STATE_BLANK,
+    STATE_ALL,
+    STATE_FORK,
+    STATE_CORNER,
+    STATE_END,
+    STATE_STRAIGHT,
 
-const EXISTING_STATES = [
-    {state: IMAGE_BLANK, used: true},
-    {state: IMAGE_ALL, used: true},
+    STATE_BLANK_T,
+    STATE_END_T,
+    STATE_STRAIGHT_T,
 
-    {state: IMAGE_FORK_UP, used: true},
-    {state: IMAGE_FORK_DOWN, used: true},
-    {state: IMAGE_FORK_LEFT, used: true},
-    {state: IMAGE_FORK_RIGHT, used: true},
-
-    {state: IMAGE_CORNER_TOP_LEFT, used: true},
-    {state: IMAGE_CORNER_TOP_RIGHT, used: true},
-    {state: IMAGE_CORNER_BOTTOM_LEFT, used: true},
-    {state: IMAGE_CORNER_BOTTOM_RIGHT, used: true},
-
-    {state: IMAGE_END_UP, used: true},
-    {state: IMAGE_END_DOWN, used: true},
-    {state: IMAGE_END_LEFT, used: true},
-    {state: IMAGE_END_RIGHT, used: true},
-
-    {state: IMAGE_STRAIGHT_VERTICAL, used: true},
-    {state: IMAGE_STRAIGHT_HORIZONTAL, used: true},
+    STATE_BLANK_2,
+    STATE_ALL_2,
+    STATE_FORK_2,
+    STATE_CORNER_2,
+    STATE_END_2,
+    STATE_STRAIGHT_2,
 ];
 
-var USED_STATES = [];
+// map states to connections, autogenerated with rotations
+const CONNECTIONS_DICT = {};
+
+// all existing states, including rotation
+const EXISTING_STATES = {};
+// the board
+const BOARD = [];
+// all usable state names for cells at the begining
+const USED_STATES = [];
 
 
 var SIZE = 20;
@@ -174,10 +193,12 @@ $(async function()
     $(window).on("resize", resizeBoard);
     // general setup
     resizeBoard();
+    biuldRotatedStates();
     buildStateController();
     // board setup
     rebuildUsedStates();
     populateBoard();
+    console.log(CONNECTIONS_DICT);
 });
 
 function resizeBoard(evt)
@@ -186,18 +207,112 @@ function resizeBoard(evt)
     $("#board").height($("#board").width());
 }
 
+function biuldRotatedStates()
+{
+    Object.keys(EXISTING_STATES).forEach(key => delete EXISTING_STATES[key]);
+    Object.keys(CONNECTIONS_DICT).forEach(key => delete CONNECTIONS_DICT[key]);
+    CONNECTIONS_DICT[STATE_ERROR] = {
+        up: null,
+        down: null,
+        left: null,
+        right: null,
+    };
+    BASE_STATES.forEach(state => {
+        for (let rotation = 0; rotation < 360; rotation += 90)
+        {
+            let id = buildRotatedConnection(state, rotation);
+            if (id != null)
+            {
+                EXISTING_STATES[id] = {
+                    imageKey: state,
+                    rotation: rotation,
+                    used: true
+                };
+            }
+        }
+    });
+}
+
+function buildRotatedConnection(stateKey, rotation)
+{
+    let id = stateKey + "_" + rotation;
+    if (id in CONNECTIONS_DICT)
+    {
+        return null;
+    }
+    let rotationOffset = Math.floor(rotation / 90);
+    let originalRules = BASE_CONNECTIONS_DICT[stateKey];
+    let originalRuleList = [originalRules.up, originalRules.right, originalRules.down, originalRules.left];
+    let len = originalRuleList.length;
+    // new rotation
+    let rotatedRuleList = [
+        originalRuleList[(0 + rotationOffset) % len],
+        originalRuleList[(1 + rotationOffset) % len],
+        originalRuleList[(2 + rotationOffset) % len],
+        originalRuleList[(3 + rotationOffset) % len]
+    ]
+    // duplicate rotation
+    if (rotationExists(stateKey, rotatedRuleList))
+    {
+        return null;
+    }
+
+    CONNECTIONS_DICT[id] = {
+        up: rotatedRuleList[0],
+        right: rotatedRuleList[1],
+        down: rotatedRuleList[2],
+        left: rotatedRuleList[3],
+    }
+    return id;
+}
+
+function rotationExists(stateKey, newRulesList)
+{
+    let partialID = stateKey + "_";
+    for (let rotation = 0; rotation < 360; rotation += 90)
+    {
+        let id = partialID + rotation;
+        if (id in CONNECTIONS_DICT)
+        {
+            let rotatedRules = CONNECTIONS_DICT[id];
+            if (
+                newRulesList[0] == rotatedRules.up &&
+                newRulesList[1] == rotatedRules.right &&
+                newRulesList[2] == rotatedRules.down &&
+                newRulesList[3] == rotatedRules.left
+            )
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function buildStateController()
 {
     let statesDiv = $("#states");
     statesDiv.empty();
-    EXISTING_STATES.forEach(function (eState, x) {
-        statesDiv.append(`<input type="checkbox" id="state_${x}" ${eState.used ? "checked" : ""}><img src="${eState.state}" class="stateIcon" alt="state">`);
+    Object.values(EXISTING_STATES).forEach(function (eState, x) {
+        statesDiv.append(`<input type="checkbox" id="state_${x}" ${eState.used ? "checked" : ""}><img src="${STATE_IMAGES_DICT[eState.imageKey]}" data-rotate="${eState.rotation}" class="stateIcon" alt="state">`);
+    });
+    rotateImages($(".stateIcon"));
+}
+
+function rotateImages(images)
+{
+    images.each(function() {
+        var deg = $(this).data("rotate") * -1 || 0;
+        var rotate = "rotate(" + deg + "deg)";
+        $(this).css({
+            "transform": rotate,
+        });
     });
 }
 
 function updateUsedStates()
 {
-    EXISTING_STATES.forEach(function (eState, x) {
+    Object.values(EXISTING_STATES).forEach(function (eState, x) {
         eState.used = $(`#state_${x}`).is(':checked');
     });
     rebuildUsedStates();
@@ -206,10 +321,10 @@ function updateUsedStates()
 function rebuildUsedStates()
 {
     USED_STATES.length = 0;
-    EXISTING_STATES.forEach(eState => {
-        if (eState.used)
+    Object.keys(EXISTING_STATES).forEach(stateID => {
+        if (EXISTING_STATES[stateID].used)
         {
-            USED_STATES.push(eState.state);
+            USED_STATES.push(stateID);
         }
     });
 }
@@ -268,7 +383,13 @@ function updateBoard()
         let boardCell = BOARD[x];
         if (!boardCell.colapsed && boardCell.states.length == 1)
         {
-            $(this).attr("src", boardCell.states[0]);
+            let cell = $(this)
+            let state = EXISTING_STATES[boardCell.states[0]];
+            let image = STATE_IMAGES_DICT[state == undefined ? STATE_ERROR : state.imageKey]
+            cell.attr("src", image);
+            if (state != undefined)
+            cell.attr("data-rotate", state.rotation);
+            rotateImages(cell);
             boardCell.colapsed = true;
         }
     });
@@ -366,7 +487,7 @@ function updateStates()
         }
         if (cell.states.length == 0)
         {
-            cell.states = [IMAGE_ERROR];
+            cell.states = [STATE_ERROR];
         }
     }
 }
