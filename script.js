@@ -308,14 +308,27 @@ function colapseCell(bestCellNumber)
     return false;
 }
 
-function getCellSideState(cell, side)
+function getCellSideStateConnections(cell, side)
 {
-    let cellState = cell == null || cell.states.length > 1 ? null : cell.states[0];
-    if (cellState == null)
+    let cellStates = cell == null || cell.states.length == 0 ? null : cell.states;
+    if (cellStates == null)
     {
         return null;
     }
-    return CONNECTIONS_DICT[cellState][side];
+    let connections = [];
+    cellStates.forEach(state => {
+        let sideState = CONNECTIONS_DICT[state][side];
+        if (sideState == null)
+        {
+            return null
+        }
+        connections.push(sideState);
+    });
+    if (connections.length == 0)
+    {
+        return null
+    }
+    return connections;
 }
 
 function updateStates()
@@ -331,29 +344,29 @@ function updateStates()
             let leftCell = coll < 1 ? null : BOARD[x - 1];
             let rightCell = coll >= SIZE - 1 ? null : BOARD[x + 1];
 
-            let upCellState = getCellSideState(upCell, "down");
-            let downCellState = getCellSideState(downCell, "up");
-            let leftCellState = getCellSideState(leftCell, "right");
-            let rightCellState = getCellSideState(rightCell, "left");
+            let upCellStateConnections = getCellSideStateConnections(upCell, "down");
+            let downCellStateConnections = getCellSideStateConnections(downCell, "up");
+            let leftCellStateConnections = getCellSideStateConnections(leftCell, "right");
+            let rightCellStateConnections = getCellSideStateConnections(rightCell, "left");
 
             let newStates = [];
             cell.states.forEach(state => {
                 let stateRules = CONNECTIONS_DICT[state];
                 if (
-                    (upCellState == null || upCellState == stateRules.up) &&
-                    (downCellState == null || downCellState == stateRules.down) &&
-                    (leftCellState == null || leftCellState == stateRules.left) &&
-                    (rightCellState == null || rightCellState == stateRules.right)
+                    (upCellStateConnections == null || upCellStateConnections.includes(stateRules.up)) &&
+                    (downCellStateConnections == null || downCellStateConnections.includes(stateRules.down)) &&
+                    (leftCellStateConnections == null || leftCellStateConnections.includes(stateRules.left)) &&
+                    (rightCellStateConnections == null || rightCellStateConnections.includes(stateRules.right))
                 )
                 {
                     newStates.push(state);
                 }
             });
             cell.states = newStates;
-            if (cell.states.length == 0)
-            {
-                cell.states = [IMAGE_ERROR];
-            }
+        }
+        if (cell.states.length == 0)
+        {
+            cell.states = [IMAGE_ERROR];
         }
     }
 }
