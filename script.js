@@ -48,99 +48,99 @@ const STATE_IMAGES_DICT = {
     [STATE_STRAIGHT_2]: "img/straight_2.png",
 }
 
-// map states to connections
+// map states to connections (each side's connections should be written left to right, in relative perspective)
 const BASE_CONNECTIONS_DICT = {
     [STATE_BLANK]: {
-        up: "1_0",
-        down: "1_0",
-        left: "1_0",
-        right: "1_0",
+        up: ["1_0", "1_0", "1_0"],
+        down: ["1_0", "1_0", "1_0"],
+        left: ["1_0", "1_0", "1_0"],
+        right: ["1_0", "1_0", "1_0"],
     },
     [STATE_ALL]: {
-        up: "1_1",
-        down: "1_1",
-        left: "1_1",
-        right: "1_1",
+        up: ["1_0", "1_1", "1_0"],
+        down: ["1_0", "1_1", "1_0"],
+        left: ["1_0", "1_1", "1_0"],
+        right: ["1_0", "1_1", "1_0"],
     },
     [STATE_FORK]: {
-        up: "1_1",
-        down: "1_0",
-        left: "1_1",
-        right: "1_1",
+        up: ["1_0", "1_1", "1_0"],
+        down: ["1_0", "1_0", "1_0"],
+        left: ["1_0", "1_1", "1_0"],
+        right: ["1_0", "1_1", "1_0"],
     },
     [STATE_CORNER]: {
-        up: "1_1",
-        down: "1_0",
-        left: "1_1",
-        right: "1_0",
+        up: ["1_0", "1_1", "1_0"],
+        down: ["1_0", "1_0", "1_0"],
+        left: ["1_0", "1_1", "1_0"],
+        right: ["1_0", "1_0", "1_0"],
     },
     [STATE_END]: {
-        up: "1_1",
-        down: "1_0",
-        left: "1_0",
-        right: "1_0",
+        up: ["1_0", "1_1", "1_0"],
+        down: ["1_0", "1_0", "1_0"],
+        left: ["1_0", "1_0", "1_0"],
+        right: ["1_0", "1_0", "1_0"],
     },
     [STATE_STRAIGHT]: {
-        up: "1_1",
-        down: "1_1",
-        left: "1_0",
-        right: "1_0",
+        up: ["1_0", "1_1", "1_0"],
+        down: ["1_0", "1_1", "1_0"],
+        left: ["1_0", "1_0", "1_0"],
+        right: ["1_0", "1_0", "1_0"],
     },
 
     [STATE_BLANK_T]: {
-        up: "1_0",
-        down: "2_0",
-        left: "0.5_0",
-        right: "0.5_0",
+        up: ["1_0", "1_0", "1_0"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["0.5/2_0", "0.5/0.5_0", "0.5/1_0"],
+        right: ["0.5/1_0", "0.5/0.5_0", "0.5/2_0"],
     },
     [STATE_END_T]: {
-        up: "1_1",
-        down: "2_0",
-        left: "0.5_0",
-        right: "0.5_0",
+        up: ["1_1", "1_1", "1_1"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["0.5/2_0", "0.5/0.5_0", "0.5/1_0"],
+        right: ["0.5/1_0", "0.5/0.5_0", "0.5/2_0"],
     },
     [STATE_STRAIGHT_T]: {
-        up: "1_1",
-        down: "2_1",
-        left: "0.5_0",
-        right: "0.5_0",
+        up: ["1_1", "1_1", "1_1"],
+        down: ["2_1", "2_1", "2_1"],
+        left: ["0.5/2_0", "0.5/0.5_0", "0.5/1_0"],
+        right: ["0.5/1_0", "0.5/0.5_0", "0.5/2_0"],
     },
 
     [STATE_BLANK_2]: {
-        up: "2_0",
-        down: "2_0",
-        left: "2_0",
-        right: "2_0",
+        up: ["2_0", "2_0", "2_0"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["2_0", "2_0", "2_0"],
+        right: ["2_0", "2_0", "2_0"],
     },
     [STATE_ALL_2]: {
-        up: "2_1",
-        down: "2_1",
-        left: "2_1",
-        right: "2_1",
+        up: ["2_1", "2_1", "2_1"],
+        down: ["2_1", "2_1", "2_1"],
+        left: ["2_1", "2_1", "2_1"],
+        right: ["2_1", "2_1", "2_1"],
     },
     [STATE_FORK_2]: {
-        up: "2_1",
-        down: "2_0",
-        left: "2_1",
-        right: "2_1",
+        up: ["2_1", "2_1", "2_1"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["2_1", "2_1", "2_1"],
+        right: ["2_1", "2_1", "2_1"],
     },
     [STATE_CORNER_2]: {
-        up: "2_1",
-        down: "2_0",
-        left: "2_1",
-        right: "2_0",
+        up: ["2_1", "2_1", "2_1"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["2_1", "2_1", "2_1"],
+        right: ["2_0", "2_0", "2_0"],
     },
     [STATE_END_2]: {
-        up: "2_1",
-        down: "2_0",
-        left: "2_0",
-        right: "2_0",
+        up: ["2_1", "2_1", "2_1"],
+        down: ["2_0", "2_0", "2_0"],
+        left: ["2_0", "2_0", "2_0"],
+        right: ["2_0", "2_0", "2_0"],
     },
     [STATE_STRAIGHT_2]: {
-        up: "2_1",
-        down: "2_1",
-        left: "2_0",
-        right: "2_0",
+        up: ["2_1", "2_1", "2_1"],
+        down: ["2_1", "2_1", "2_1"],
+        left: ["2_0", "2_0", "2_0"],
+        right: ["2_0", "2_0", "2_0"],
     },
 }
 
@@ -198,7 +198,6 @@ $(async function()
     // board setup
     rebuildUsedStates();
     populateBoard();
-    console.log(CONNECTIONS_DICT);
 });
 
 function resizeBoard(evt)
@@ -211,12 +210,6 @@ function biuldRotatedStates()
 {
     Object.keys(EXISTING_STATES).forEach(key => delete EXISTING_STATES[key]);
     Object.keys(CONNECTIONS_DICT).forEach(key => delete CONNECTIONS_DICT[key]);
-    CONNECTIONS_DICT[STATE_ERROR] = {
-        up: null,
-        down: null,
-        left: null,
-        right: null,
-    };
     BASE_STATES.forEach(state => {
         for (let rotation = 0; rotation < 360; rotation += 90)
         {
@@ -231,6 +224,12 @@ function biuldRotatedStates()
             }
         }
     });
+    CONNECTIONS_DICT[STATE_ERROR] = {
+        up: null,
+        down: null,
+        left: null,
+        right: null,
+    };
 }
 
 function buildRotatedConnection(stateKey, rotation)
@@ -276,10 +275,10 @@ function rotationExists(stateKey, newRulesList)
         {
             let rotatedRules = CONNECTIONS_DICT[id];
             if (
-                newRulesList[0] == rotatedRules.up &&
-                newRulesList[1] == rotatedRules.right &&
-                newRulesList[2] == rotatedRules.down &&
-                newRulesList[3] == rotatedRules.left
+                isRuleEqual(newRulesList[0], rotatedRules.up) &&
+                isRuleEqual(newRulesList[1], rotatedRules.right) &&
+                isRuleEqual(newRulesList[2], rotatedRules.down) &&
+                isRuleEqual(newRulesList[3], rotatedRules.left)
             )
             {
                 return true;
@@ -287,6 +286,18 @@ function rotationExists(stateKey, newRulesList)
         }
     }
     return false;
+}
+
+function isRuleEqual(rule1, rule2)
+{
+    for (let x = 0; x < rule1.length; x++)
+    {
+        if (rule1[x] != rule2[x])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 function buildStateController()
@@ -437,17 +448,18 @@ function getCellSideStateConnections(cell, side)
         return null;
     }
     let connections = [];
-    cellStates.forEach(state => {
-        let sideState = CONNECTIONS_DICT[state][side];
+    for (let x = 0; x < cellStates.length; x++)
+    {
+        let sideState = CONNECTIONS_DICT[cellStates[x]][side];
         if (sideState == null)
         {
-            return null
+            return null;
         }
         connections.push(sideState);
-    });
+    }
     if (connections.length == 0)
     {
-        return null
+        return null;
     }
     return connections;
 }
@@ -474,10 +486,10 @@ function updateStates()
             cell.states.forEach(state => {
                 let stateRules = CONNECTIONS_DICT[state];
                 if (
-                    (upCellStateConnections == null || upCellStateConnections.includes(stateRules.up)) &&
-                    (downCellStateConnections == null || downCellStateConnections.includes(stateRules.down)) &&
-                    (leftCellStateConnections == null || leftCellStateConnections.includes(stateRules.left)) &&
-                    (rightCellStateConnections == null || rightCellStateConnections.includes(stateRules.right))
+                    isConnectionCorrect(stateRules.up, upCellStateConnections) &&
+                    isConnectionCorrect(stateRules.down, downCellStateConnections) &&
+                    isConnectionCorrect(stateRules.left, leftCellStateConnections) &&
+                    isConnectionCorrect(stateRules.right, rightCellStateConnections)
                 )
                 {
                     newStates.push(state);
@@ -490,4 +502,26 @@ function updateStates()
             cell.states = [STATE_ERROR];
         }
     }
+}
+
+function isConnectionCorrect(cellSideRule, neighbourCellSideRules)
+{
+    if (neighbourCellSideRules == null)
+    {
+        return true;
+    }
+    for (let x = 0; x < neighbourCellSideRules.length; x++)
+    {
+        let neighbourRule = neighbourCellSideRules[x];
+        let otherSideRule = [];
+        for (let y = 0; y < neighbourRule.length; y++)
+        {
+            otherSideRule[y] = neighbourRule[neighbourRule.length - y - 1]
+        }
+        if (isRuleEqual(cellSideRule, otherSideRule))
+        {
+            return true;
+        }
+    }
+    return false;
 }

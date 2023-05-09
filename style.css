@@ -5,6 +5,7 @@ main {
 
 #board {
     margin: auto;
+    margin-top: 0;
     background-color: black;
     display: flex;
     width: 95%;
