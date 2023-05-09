@@ -1,3 +1,4 @@
+
 // not colapsed image
 const IMAGE_NOTHING = "img/nothing.png";
 
